@@ -1,14 +1,14 @@
 const carousel = document.getElementById('carousel');
 const moreRecipebtn = document.querySelector('.more-recipes-btn');
 const recipeList = document.querySelector('.recipe-list');
-const apiKey = "4d4601e174c54ed597965c200dba685d";
-let itemArray = [];
+const apiKey = "1e968c44f6644535ac2d3a4ff0c76bc2";
+const leftSide = document.querySelector('.left-icon')
 
 
 document.addEventListener("DOMContentLoaded", (event)=>{
     event.preventDefault();
 
-    fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}`)
+    fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=15`)
         .then(response =>{
             if(response.status.ok){
                 throw new Error(`Network response was not ok: ${response.status}`);
@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", (event)=>{
         
             carousel.innerHTML += `<i class="fa-solid fa-arrow-right icon-btn right-icon"></i>`;
 
+            
             recipeItem.forEach(item=>{
                 recipeList.innerHTML +=`
                 <div class="recipe-item">
@@ -40,6 +41,8 @@ document.addEventListener("DOMContentLoaded", (event)=>{
                 </div>
                 `
             })
+
+            
 
             moreRecipebtn.addEventListener('click', function(){
                 fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=10`)
